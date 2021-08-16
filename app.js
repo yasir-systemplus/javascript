@@ -1,9 +1,10 @@
-function greetings(name, item1, item2) {
-  console.log(`
-  Hello: ${name}, 
-  Item 1: ${item1}, 
-  Item 2: ${item2}, 
-  Grand Total: ${item2 + item1}`);
-}
+const message = "We love Pakistan!";
 
-greetings("Yasir", 34, 56);
+console.log(message.startsWith("we")); //false;
+console.log(message.startsWith("We")); //true;
+console.log(message.endsWith("!")); //true;
+
+console.log(message.indexOf("e"));
+console.log(message.indexOf("a", 3));
+
+console.log(message.includes("S")); //false;
