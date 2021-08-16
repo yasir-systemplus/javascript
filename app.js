@@ -1,83 +1,43 @@
-// Object Literals
+console.log("Yasir ".repeat(20));
 
-function CallMe(name, sound) {
-  return {
-    name,
-    sound,
-    classes: {
-      physics: "Upper Floor",
-      maths: "Ground Floor",
-    },
-
-    sayWithMorePower: function () {
-      console.log(this.name.toUpperCase() + this.sound.toUpperCase());
-    },
-  };
+function callMe(name = "Unknow", age = "0") {
+  console.log(name, age);
 }
 
-const caller = CallMe("yasir", "yahoo!");
-const dup = { ...CallMe("yasir", "yahoo!") };
-const {
-  name,
-  sound,
-  classes: { maths, physics },
-} = dup;
+callMe("Yasir");
 
-console.log(name + sound);
-console.log(maths, physics);
+const students = (...stnds) => {
+  return stnds.join(", ");
+};
 
-const student = new Map();
-student.set("name", "Asad");
-student.set("age", 34);
+console.log(students("Bilal", "Farhan"));
 
-for (const letter of name) {
-  console.log(letter);
-}
-
-for (const prop of student.keys()) {
-  console.log(prop);
-}
-for (const prop of student.entries()) {
-  console.log(`${prop[0]}: ${prop[1]}`);
-}
-
-class Student {
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  introduce() {
-    return `${this.name}, age: ${this.age}`;
-  }
-}
-
-const studentB = new Student("Bilal", 34);
-console.log(studentB.introduce());
-
-class PartTimeStudent extends Student {
-  constructor(name, age) {
-    super(name, age);
-  }
-}
-
-const studentC = new Student("Faizan", 12);
-console.log(studentC.introduce());
-
-const schoolStudents = {
-  _list: [],
-
-  get list() {
-    return this._list.join(", ");
-  },
-
-  set student(value) {
-    this._list.push(value);
+const person = {
+  name: "Bilal",
+  age: 23,
+  hobbies: ["Staring", "Gazing", "Waching", "Seeing"],
+  getHobbyString: function () {
+    return this.hobbies.map((h) => {
+      return h.toUpperCase();
+    });
   },
 };
 
-schoolStudents.student = "Ali";
-schoolStudents.student = "Sheroz";
-schoolStudents.student = "Manzoor";
+console.log(person.getHobbyString());
 
-console.log(schoolStudents.list);
+function* countTo5() {
+  yield 1;
+  yield 2;
+  yield 3;
+  yield 4;
+  yield 5;
+}
+
+let counter = countTo5();
+
+console.log(counter.next());
+console.log(counter.next());
+console.log(counter.next());
+console.log(counter.next());
+console.log(counter.next());
+console.log(counter.next()); // Done with it.
