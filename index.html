@@ -22,18 +22,12 @@
     <div id="boxes"></div>
 
     <script>
-      let boxes = document.getElementById("boxes");
+      const pizza = true;
+      console.log(pizza);
+      pizza = false;
 
-      for (let index = 0; index < 5; index++) {
-        const box = document.createElement("div");
-        box.classList.add("box");
-
-        box.addEventListener("click", (ev) => {
-          box.innerHTML = index;
-        });
-
-        boxes.appendChild(box);
-      }
+      //   Uncaught TypeError: Assignment to constant variable.
+      //   at index.html:27
     </script>
   </body>
 </html>
