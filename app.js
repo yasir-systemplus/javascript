@@ -1,43 +1,29 @@
-console.log("Yasir ".repeat(20));
+const delay = (seconds) => {
+  return new Promise((resolve, reject) => {
+    if (typeof seconds !== "number") {
+      return reject("Enter correct number");
+    }
 
-function callMe(name = "Unknow", age = "0") {
-  console.log(name, age);
-}
-
-callMe("Yasir");
-
-const students = (...stnds) => {
-  return stnds.join(", ");
+    setTimeout(() => {
+      resolve("Done!");
+    }, seconds * 1000);
+  });
 };
 
-console.log(students("Bilal", "Farhan"));
+delay("5")
+  .then((info) => {
+    console.log(info);
+  })
+  .catch((ex) => {
+    console.log(ex);
+  });
 
-const person = {
-  name: "Bilal",
-  age: 23,
-  hobbies: ["Staring", "Gazing", "Waching", "Seeing"],
-  getHobbyString: function () {
-    return this.hobbies.map((h) => {
-      return h.toUpperCase();
-    });
-  },
+const getPosts = async () => {
+  const resp = await fetch("https://jsonplaceholder.typicode.com/posts").then(
+    (result) => result.json()
+  );
+
+  console.log(resp);
 };
 
-console.log(person.getHobbyString());
-
-function* countTo5() {
-  yield 1;
-  yield 2;
-  yield 3;
-  yield 4;
-  yield 5;
-}
-
-let counter = countTo5();
-
-console.log(counter.next());
-console.log(counter.next());
-console.log(counter.next());
-console.log(counter.next());
-console.log(counter.next());
-console.log(counter.next()); // Done with it.
+getPosts();
