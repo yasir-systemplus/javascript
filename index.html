@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello JavaScript</title>
+    <style>
+      #boxes {
+        display: flex;
+        justify-content: space-around;
+      }
+      .box {
+        height: 5em;
+        width: 5em;
+        background-color: tomato;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hi</h1>
+    <div id="boxes"></div>
+
+    <script>
+      let boxes = document.getElementById("boxes");
+
+      for (let index = 0; index < 5; index++) {
+        const box = document.createElement("div");
+        box.classList.add("box");
+
+        box.addEventListener("click", (ev) => {
+          box.innerHTML = index;
+        });
+
+        boxes.appendChild(box);
+      }
+    </script>
+  </body>
+</html>
