@@ -1,7 +1,5 @@
-const id = Symbol("id");
+const group1 = ["Bilal", "Farhan", "Aqib"];
+const group2 = ["Jameel", "Adill", "Nouman"];
 
-const project = {
-  id: id,
-  name: "abc",
-};
-console.log(project);
+const all = [...group1, ...group2];
+console.log(all);
