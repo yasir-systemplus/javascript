@@ -261,3 +261,23 @@ const totalNonDeveloperSalaries = nonDeveloperSalaries.reduce(
 const averageNonDeveloperSalary =
   totalNonDeveloperSalaries / nonDeveloperSalaries.length;
 console.log(averageNonDeveloperSalary);
+
+const add = (x, y, z) => x + y + z;
+
+const addPartial = (x) => (y) => (z) => add(x, y, z);
+
+const sum = addPartial(5)(6)(7);
+
+console.log(sum);
+
+const countUp = (x, max) => {
+  if (x > max) return;
+  console.log(x);
+  countUp(x + 1, max);
+};
+
+countUp(0, 10);
+const add = (x, y, z) => x + y + z;
+const args = [1, 2, 3];
+const add1 = add.bind(null, 1);
+console.log(add1(2, 3));
