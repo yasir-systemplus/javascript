@@ -7,5 +7,4 @@ class Person {
 }
 
 const bilal = new Person("Bilal Ahmad", 23, "1231@31");
-
 console.log(bilal);
