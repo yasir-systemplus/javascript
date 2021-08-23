@@ -21,17 +21,21 @@ function get(city) {
 
 const allPromise = Promise.all([get(cityList[0])]);
 
-allPromise
-  .then((respArr) => respArr.map((w) => JSON.parse(w)))
-  .then(successHandler)
-  .catch(failHandler)
-  .finally(() => {
+(async function () {
+  try {
+    const respArr = await allPromise;
+    const tranformedInput = respArr.map((w) => JSON.parse(w));
+    successHandler(tranformedInput);
+  } catch (error) {
+    failHandler(error);
+  } finally {
     const loader = document.getElementsByClassName("loader")[0];
 
     loader.classList.remove("show");
     loader.classList.add("hidden");
     console.log("Bhola Record");
-  });
+  }
+})();
 
 function successHandler(resp) {
   const markup = resp
