@@ -1,9 +1,10 @@
 const weatherDiv = document.getElementById("load-weather");
-
 const request = new XMLHttpRequest();
 
-function get() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=lahore&appid=04ddb0d19a88cdaba732986bb093bb7e`;
+const cityList = ["karachi"];
+
+function get(city) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=04ddb0d19a88cdaba732986bb093bb7e`;
 
   return new Promise((resolve, reject) => {
     request.open("get", url);
@@ -18,9 +19,10 @@ function get() {
   });
 }
 
-weatherDiv.appendChild(loader());
+const allPromise = Promise.all([get(cityList[0])]);
 
-get()
+allPromise
+  .then((respArr) => respArr.map((w) => JSON.parse(w)))
   .then(successHandler)
   .catch(failHandler)
   .finally(() => {
@@ -30,6 +32,24 @@ get()
     loader.classList.add("hidden");
     console.log("Bhola Record");
   });
+
+function successHandler(resp) {
+  const markup = resp
+    .map(
+      (w) => `
+  <h3>Location:${w.name}</h3>
+  <strong>Temperature:</strong> ${toF(w.main.temp)} F<br/>
+  <strong>Feels like:</strong> ${toF(w.main.feels_like)} F<br/>
+  <strong>Temperature Min.:</strong> ${toF(w.main.temp_min)} F<br/>
+  <strong>Temperature Max.:</strong> ${toF(w.main.temp_max)} F<br/>
+  <strong>Pressure:</strong> ${w.main.pressure}<br/>
+  <strong>Humidity:</strong> ${w.main.humidity}<br/>
+  `
+    )
+    .join("");
+
+  weatherDiv.innerHTML += markup;
+}
 
 function failHandler(status) {
   console.log(status);
@@ -41,33 +61,15 @@ function failHandler(status) {
   weatherDiv.innerHTML = markup;
 }
 
-function successHandler(resp) {
-  const jsonResp = JSON.parse(resp);
-
-  const markup = `
-
-  <strong>Location:</strong> ${jsonResp.name}<br/>
-  <strong>Temperature:</strong> ${toF(jsonResp.main.temp)} F<br/>
-  <strong>Feels like:</strong> ${toF(jsonResp.main.feels_like)} F<br/>
-  <strong>Temperature Min.:</strong> ${toF(jsonResp.main.temp_min)} F<br/>
-  <strong>Temperature Max.:</strong> ${toF(jsonResp.main.temp_max)} F<br/>
-  <strong>Pressure:</strong> ${jsonResp.main.pressure}<br/>
-  <strong>Humidity:</strong> ${jsonResp.main.humidity}<br/>
-  `;
-
-  weatherDiv.innerHTML += markup;
-}
-
 function toF(k) {
   return ((k - 273.15) * 1.8 + 32).toFixed(0);
 }
 
-function loader() {
+document.addEventListener("DOMContentLoaded", function () {
   const loader = document.createElement("p");
   loader.classList.add("loader");
   loader.classList.add("show");
 
   loader.innerHTML = "Loading...";
-
-  return loader;
-}
+  weatherDiv.appendChild(loader);
+});
