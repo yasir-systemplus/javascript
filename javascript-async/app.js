@@ -1,4 +1,4 @@
-const loadWearher = document.getElementById("load-weather");
+const weatherDiv = document.getElementById("load-weather");
 
 const request = new XMLHttpRequest();
 
@@ -18,7 +18,18 @@ function get() {
   });
 }
 
-get().then(successHandler).catch(failHandler);
+weatherDiv.appendChild(loader());
+
+get()
+  .then(successHandler)
+  .catch(failHandler)
+  .finally(() => {
+    const loader = document.getElementsByClassName("loader")[0];
+
+    loader.classList.remove("show");
+    loader.classList.add("hidden");
+    console.log("Bhola Record");
+  });
 
 function failHandler(status) {
   console.log(status);
@@ -27,7 +38,7 @@ function failHandler(status) {
   <p>There is problem in this request. Error Code: ${status}</p>
   `;
 
-  loadWearher.innerHTML = markup;
+  weatherDiv.innerHTML = markup;
 }
 
 function successHandler(resp) {
@@ -44,9 +55,19 @@ function successHandler(resp) {
   <strong>Humidity:</strong> ${jsonResp.main.humidity}<br/>
   `;
 
-  loadWearher.innerHTML = markup;
+  weatherDiv.innerHTML += markup;
 }
 
 function toF(k) {
   return ((k - 273.15) * 1.8 + 32).toFixed(0);
+}
+
+function loader() {
+  const loader = document.createElement("p");
+  loader.classList.add("loader");
+  loader.classList.add("show");
+
+  loader.innerHTML = "Loading...";
+
+  return loader;
 }
