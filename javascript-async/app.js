@@ -2,18 +2,33 @@ const loadWearher = document.getElementById("load-weather");
 
 const request = new XMLHttpRequest();
 
-function get(success) {
-  navigator.geolocation.getCurrentPosition((loc) => {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${loc.coords.latitude}&lon=${loc.coords.longitude}&appid=04ddb0d19a88cdaba732986bb093bb7e`;
+function get() {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=lahore&appid=04ddb0d19a88cdaba732986bb093bb7e`;
+
+  return new Promise((resolve, reject) => {
     request.open("get", url);
     request.onload = function () {
-      success(request.responseText);
+      if (request.status == 200) {
+        resolve(request.responseText);
+      } else {
+        reject(Error(request.status));
+      }
     };
     request.send();
   });
 }
 
-get(successHandler);
+get().then(successHandler).catch(failHandler);
+
+function failHandler(status) {
+  console.log(status);
+
+  const markup = `
+  <p>There is problem in this request. Error Code: ${status}</p>
+  `;
+
+  loadWearher.innerHTML = markup;
+}
 
 function successHandler(resp) {
   const jsonResp = JSON.parse(resp);
@@ -30,8 +45,6 @@ function successHandler(resp) {
   `;
 
   loadWearher.innerHTML = markup;
-
-  console.log(jsonResp.name);
 }
 
 function toF(k) {
