@@ -2,27 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bag Back</title>
+    <title>BackpackPacker</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" type="text/css" media="all" />
+    <script type="module" src="/js/Bagback.js"></script>
+    <script type="module" src="js/app.js"></script>
   </head>
   <body>
-    <script type="module" src="./js/bagback.js"></script>
-    <script type="module" src="./js/app.js"></script>
-
-    <script>
-      const person = {
-        firstName: "Yasir",
-        lastName: "Shahzad",
-        hobbies: ["Walking", "Running", "Reading"],
-        fullName: function () {
-          this.hobbies.forEach((h) => {
-            console.log(this.firstName + " " + h);
-          });
-        },
-      };
-
-      person.fullName();
-    </script>
+    <header class="siteheader">
+      <div class="site-title">BackpackPacker</div>
+      <div class="site-description">All backpack packing, all the time.</div>
+    </header>
+    <main class="maincontent"></main>
+    <footer class="sitefooter">
+      <p>
+        Demo project for JavaScript Essential Training, a LinkedIn Learning
+        course.
+      </p>
+    </footer>
   </body>
 </html>
