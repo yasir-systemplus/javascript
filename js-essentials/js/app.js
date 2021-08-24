@@ -51,3 +51,60 @@ const content = `
  `;
 
 main.innerHTML = content;
+
+/**
+ * Using document.querySelector()
+ */
+
+const mainContent = document.querySelector("main");
+// console.log(mainContent);
+
+// getting the node list
+const list = document.querySelectorAll("main li");
+// console.log(list);
+
+list.forEach((li, index) => {
+  if (index % 2 == 0) {
+    li.style.backgroundColor = "red";
+  }
+});
+
+const list1 = document.getElementsByClassName("packprop");
+for (const el of list1) {
+  el.style.textTransform = "UPPERCASE";
+}
+
+// ClassName and ClassList
+
+console.log(mainContent.className);
+console.log(mainContent.classList);
+
+mainContent.classList.add("new__class__yasir");
+console.log(mainContent.classList);
+
+// Set Attribute
+
+list.forEach((li) => {
+  li.setAttribute("title", li.innerHTML);
+});
+
+// Creating new element
+
+const desc = document.createElement("article");
+desc.classList.add("description");
+const title = document.createElement("h2");
+title.innerHTML = "Backpack are flexible";
+title.style.marginBottom = "10px";
+
+desc.appendChild(title);
+
+const subHeading = document.createElement("p");
+subHeading.style.color = "lightgrey";
+subHeading.fontSize = "20px";
+subHeading.style.marginTop = 0;
+
+subHeading.innerHTML =
+  "Eiusmod anim nulla eiusmod pariatur velit sit ex esse nulla occaecat Lorem. Duis pariatur dolore veniam amet in elit voluptate. Laboris ex proident ad labore aute pariatur adipisicing commodo esse nisi ad pariatur sint. Laborum et fugiat cupidatat exercitation amet. Dolore consectetur anim reprehenderit id commodo ex nostrud nulla pariatur quis ut.";
+
+desc.appendChild(subHeading);
+mainContent.appendChild(desc);
