@@ -1,3 +1,14 @@
 import bagpack from "./bagback.js";
 
-console.log(bagpack);
+// const owner = {
+//   _firstName: "",
+//   set name(value) {
+//     this._firstName = value;
+//   },
+
+//   get name() {
+//     return "Hello" + this._firstName;
+//   },
+// };
+
+// bagpack.company();
